@@ -2,17 +2,16 @@
 #include <stdlib.h>
 #include <time.h>
 
-int askRepeats(int * repeats) {
+int askRepeats(long long * repeats) {
     printf("Entrez le nombre de repetitions : \x1b[96m");
     fflush(stdout);
 
-    scanf("%d", repeats);
-
-    while (*repeats < 0 || *repeats > 10e10) {
-        printf("\x1b[0mPour mon pc, veuillez saisir un entier entre 1 et 10^10 : \1b[96m");
+    scanf("%lld", repeats);
+    while (*repeats < 0) {
+        printf("\x1b[0mPour mon pc, veuillez saisir un entier entre 1 et 10^10 : \x1b[96m");
         fflush(stdout);
 
-        scanf("%d", repeats);
+        scanf("%lld", repeats);
     }
     printf("\x1b[0m");
 
@@ -31,10 +30,10 @@ int main() {
     srand(time(NULL));
     // On approxime pi/4
 
-    int repeats = 10000000000;
+    long long repeats = 10000000000;
     askRepeats(&repeats);
 
-    int inside = 0;
+    long int inside = 0;
     int i = 0;
 
     while (i < repeats) {
@@ -48,9 +47,9 @@ int main() {
         i++;
     }
 
-    double fourth_pi = (double) inside / repeats;
-    double pi = fourth_pi * 4;
+    long double fourth_pi = (long double) inside / repeats;
+    long double pi = fourth_pi * 4;
 
-    printf("Nombre de points dans le cercle : \x1b[34m%d\x1b[0m.\nNombre total de points          : \x1b[34m%d\x1b[0m.\n", inside, repeats);
-    printf("Une valeur approchee de \x1b[32mpi\x1b[0m avec \x1b[34m%d\x1b[0m repetitions est : \x1b[33m%lf\x1b[0m\n", repeats, pi);
+    printf("Nombre de points dans le cercle : \x1b[34m%ld\x1b[0m.\nNombre total de points          : \x1b[34m%lld\x1b[0m.\n", inside, repeats);
+    printf("Une valeur approchee de \x1b[32mpi\x1b[0m avec \x1b[34m%lld\x1b[0m repetitions est : \x1b[33m%.30Lf\x1b[0m\n", repeats, pi);
 }
