@@ -1,40 +1,84 @@
 #include <stdio.h>
+#include <string.h>
 
+int consonne(char c) {
+    char consonnes[] = "bcdfghjklmnpqrstvwxz";
+
+    for (int i = 0; i < 20; i++) {
+        if (consonnes[i] == c) {
+            return 1;
+        }
+    }
+    return 0;
+}
+int consonneMAJ(char c) {
+    char consonnes[] = "BCDFGHJKLMNPQSRTVWXZ";
+
+    for (int i = 0; i < 20; i++) {
+        if (consonnes[i] == c) {
+            return 1;
+        }
+    }
+    return 0;
+}
+int voyelle(char c) {
+    char voyelles[] = "aeiuoy";
+
+    for (int i = 0; i < 20; i++) {
+        if (voyelles[i] == c) {
+            return 1;
+        }
+    }
+    return 0;
+}
+int voyelleMAJ(char c) {
+    char voyelles[] = "AEIOUY";
+
+    for (int i = 0; i < 20; i++) {
+        if (voyelles[i] == c) {
+            return 1;
+        }
+    }
+    return 0;
+}
 int main() {
-    char text[81];
-    int indice_courant = 0;
-
-    printf("Entrez votre texte (max 80 caracteres) :");
+    char texte[81];
+    printf("Entrez votre texte : \x1b[36m");
     fflush(stdout);
 
-    char input;
-    scanf("%c", &input);
+    char caractere;
+    int indice_courant = 0;
 
-    while (input != '\n' && indice_courant < 80) {
-        text[indice_courant] = input;
+    scanf("%c", &caractere);
+    while (caractere != '\n' && indice_courant < 80) {
+        texte[indice_courant] = caractere;
         indice_courant++;
 
-        scanf("%c", &input);
+        scanf("%c", &caractere);
     }
-    text[indice_courant] = '\0';
 
-    printf("Le texte saisi est \x1b[31m%s\x1b[0m, et il y a %d caracteres\n", text, indice_courant);
+    texte[indice_courant] = '\0';
+
+    FILE *fp;
+    fp = fopen("./temp.txt", "w");
+
+    fprintf(fp, "Votre texte est %s et contient %d caracteres\n", texte, indice_courant); 
 
     char reversed[81];
-    for (int i = indice_courant - 1; i >= 0; i--) {
-        reversed[indice_courant - 1 - i] = text[i];
+    for (int i = 0; i < indice_courant; i++) {
+        reversed[i] = texte[indice_courant - 1 - i];
     }
     reversed[indice_courant] = '\0';
 
-    printf("Le texte inversed est \x1b[32m%s\x1b[0m\n", reversed);
+    fprintf(fp, "Votre texte a l'envers donne %s\n", reversed);
 
     int est_palindrome = 1;
     int indice_a = 0;
     int indice_b = 0;
 
     while (est_palindrome && indice_a < indice_courant) {
-        char a = text[indice_a];
-        char b = reversed[indice_b];
+        char a = texte[indice_a];
+        char b = texte[indice_courant - 1 - indice_b];
 
         if (a == ' ') {
             indice_a++;
@@ -48,10 +92,24 @@ int main() {
         }
     }
 
-    if (est_palindrome) {
-        printf("Votre phrase est un palindrome, bravo\n");
-    } else {
-        printf("Votre phrase n'est pas un palindrome, dommage\n");
+    fprintf(fp, est_palindrome
+        ? "Ce texte est un palindrome\n"
+        : "Ce texte n'est pas un palindrome\n"
+    );
+
+    fclose(fp);
+    FILE *reader;
+    reader = fopen("./temp.txt", "r");
+
+    char ligne[4096];
+
+    while (fgets(ligne, 4096, reader)) {
+        for (int i = 0; i < strlen(ligne); i++) {
+            int colorCode = voyelle(ligne[i]) || voyelleMAJ(ligne[i]) ? 91 : consonne(ligne[i]) || consonneMAJ(ligne[i]) ? 96 : 93;
+            printf("\x1b[%dm%c\x1b[0m", colorCode, ligne[i]);
+        }
     }
-    return 0;
+
+    fclose(reader);
+    remove("./temp.txt");
 }
