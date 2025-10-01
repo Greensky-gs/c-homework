@@ -10,4 +10,5 @@ add_executable(home main.c
         tp3/serie.c
         tp3/matrice.c
         tp3/text.c
+        custom/pi.c
 )
