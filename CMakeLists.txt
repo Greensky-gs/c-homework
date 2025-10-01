@@ -7,4 +7,7 @@ add_executable(home main.c
         tp2/bissextile.c
         tp2/times.c
         tp2/times.c
+        tp3/serie.c
+        tp3/matrice.c
+        tp3/text.c
 )
