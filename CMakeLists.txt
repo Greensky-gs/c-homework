@@ -11,4 +11,6 @@ add_executable(home main.c
         tp3/matrice.c
         tp3/text.c
         custom/pi.c
+        td6/exo.c
+        td6/chained_list.c
 )
