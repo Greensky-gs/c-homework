@@ -13,4 +13,8 @@ add_executable(home main.c
         custom/pi.c
         td6/exo.c
         td6/chained_list.c
+        tp6/exo1.c
+        tp3/text_normal.c
+        tp4/duration.c
+        tp4/sort.c
 )
