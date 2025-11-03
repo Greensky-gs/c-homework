@@ -17,4 +17,6 @@ add_executable(home main.c
         tp3/text_normal.c
         tp4/duration.c
         tp4/sort.c
+        tp5/exo1.c
+        tp5/exo2.c
 )

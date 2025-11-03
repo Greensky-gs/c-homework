@@ -49,17 +49,16 @@ int Differentes(char *ch1, char *ch2) {
     return differentes;
 }
 
-#define destintoin destination
 void Ajout(char * destination, char * source) {
     int tailleDest = Longueur(destination);
     int indiceDeLaSource = 0;
 
     while (source[indiceDeLaSource] != '\0') {
-        destintoin[tailleDest + indiceDeLaSource] = source[indiceDeLaSource];
+        destination[tailleDest + indiceDeLaSource] = source[indiceDeLaSource];
         indiceDeLaSource++;
     }
 
-    destintoin[tailleDest + indiceDeLaSource] = '\0';
+    destination[tailleDest + indiceDeLaSource] = '\0';
 }
 
 
