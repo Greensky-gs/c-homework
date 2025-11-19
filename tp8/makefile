@@ -3,7 +3,7 @@ FLAGS=-Wall -fsanitize=address,undefined -g
 STDLIBS=-lm
 
 tp8exo2.exe: tp8exo2.c matrice.o image.o
-	$(CC) tp8exo2.c matrice.o image.o $(FLAGS) $(STDLIBS) -o tp8exo2.exe
+	$(CC) tp8exo2.c matrice.o image.o $(FLAGS) $(STDLIBS) -lm -o tp8exo2.exe
 
 image.o: image.c image.h
 	$(CC) image.c -c -o image.o $(FLAGS)
