@@ -4,9 +4,8 @@
 #include "image.h"
 
 int main() {
-	tImage image = ImLire("feep.pgm");
+	tImage image = ImLire("chien.pgm");
 
-	afficherImage(image);
 
 	tImage rotation = ImAllouer(ImNbCol(image), ImNbLig(image));
 	
@@ -19,7 +18,9 @@ int main() {
 		}
 	}
 	
-    afficherImage(rotation);
+    // afficherImage(rotation);
+
+	ImEcrire(rotation, "chien_rotation.pgm");
 
 	ImLiberer(&image);
     ImLiberer(&rotation);
