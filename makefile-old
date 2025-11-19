@@ -1,0 +1,17 @@
+CC=gcc
+FLAGS=-Wall -fsanitize=address,undefined
+
+tp8exo1.exe: tp8exo1.c matrice.o
+	$(CC) tp8exo1.c $(FLAGS) -o tp8exo1.exe matrice.o
+
+matrice.o: matrice.c matrice.h
+	$(CC) matrice.c $(FLAGS) -c
+
+clean:
+	rm -rf *.exe *.o
+
+launch:
+	make -f makefile-old clean
+	make -f makefile-old
+	clear
+	./tp8exo1.exe
