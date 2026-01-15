@@ -1,0 +1,11 @@
+[package]
+name = "custom"
+version = "0.1.0"
+edition = "2024"
+
+[[bin]]
+name = "pi"
+path = "pi.rs"
+
+[dependencies]
+rand = "0.9.2"
