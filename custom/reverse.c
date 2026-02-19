@@ -16,20 +16,25 @@ void reverse(void * tab, int n, size_t t) {
 	free(temp);
 }
 
-void print_int_tab(int * tab, int size) {
+void print_tab(void * tab, int size, size_t t, void callback(void *)) {
 	int i = 0;
-	while (i++ < size) {
-		printf("%d ", tab[i - 1]);
+	while (i < size) {
+		callback(tab + i * t);
+		i++;
 	}
 	printf("\n");
+}
+
+void print_int(void * p) {
+	printf("%d ", *(int *)p);
 }
 
 int main() {
 	int tab[5] = { 1, 2, 3, 4, 5 };
 
-	print_int_tab(tab, 5);
+	print_tab(tab, 5, sizeof(int), &print_int);
 
 	reverse(tab, 5, sizeof(int));
 
-	print_int_tab(tab, 5);
+	print_tab(tab, 5, sizeof(int), &print_int);
 }
